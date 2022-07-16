@@ -1,0 +1,42 @@
+﻿@model ME_Mall.Models.SubCategory
+
+@{
+    ViewData["Title"] = "Create SubCategories";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Products categories /</span> Create Subcategories</h4>
+    <div class="col-xl ">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Products Categories Form</h5>
+                <small class="text-muted float-end">SubCategories</small>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateSubCategory">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-3">
+                        <label class="form-label" asp-for="SubCategoryName" for="basic-default-fullname">Product Category</label>
+                        <input type="text" class="form-control" asp-for="SubCategoryName" id="basic-default-fullname" placeholder="Enter SubCategory Name" />
+                        <span asp-validation-for="SubCategoryName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" asp-for="CategoryId" for="basic-default-fullname">Parent Category</label>
+                        <select class="form-select" asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.message,"Id","CategoryName"))"></select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

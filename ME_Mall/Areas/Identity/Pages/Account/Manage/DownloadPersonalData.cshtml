@@ -1,0 +1,37 @@
+﻿@page
+@model DownloadPersonalDataModel
+@{
+    ViewData["Title"] = "Download Your Data";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+@{
+    if (this.User.IsInRole("Admin") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    }
+    else if (this.User.IsInRole("Owner") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_OwnerLayout.cshtml";
+
+    }
+    else if (this.User.IsInRole("User") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+    }
+    else if (this.User.IsInRole("Content Writer") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_ContentWriterLayout.cshtml";
+
+    }
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    @if (!this.User.IsInRole("User") || !this.User.Identity.IsAuthenticated)
+    {
+        <partial name="_ManageNav" />
+
+    }    <h4>@ViewData["Title"]</h4>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,232 @@
+﻿@model ME_Mall.Models.Design
+
+@{
+    ViewData["Title"] = "Home Layout";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <form enctype="multipart/form-data" asp-action="Home" method="post">
+        <div class="card">
+            <div class="row">
+                <div class="col-6">
+                        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active ">
+                                    <img class="d-block w-100" src="~/dashAssets/assets/img/elements/3.jpg" alt="First slide" id="uploadedSlide1" />
+                                    <div class="carousel-caption d-block" style="transform: translateY(-50%); bottom: initial; top: 50%;">
+                                        <p id="sub1" style="color: #F28123; font-weight: 700; text-transform: uppercase; letter-spacing: 7px; font-size: 11px;">Eos mutat malis maluisset et.</p>
+                                        <h2 id="main1">First slide</h2>
+                                        <div class="button-wrapper">
+                                            <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                                <span class="d-none d-sm-block">Upload new photo</span>
+                                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                                <input type="file"
+                                                       id="upload"
+                                                       class="input1"
+                                                       hidden
+                                                       asp-for="ImageFile1"
+                                                       accept="image/png, image/jpeg" />
+                                            </label>
+                                            <button type="button" class="btn btn-outline-secondary reset1 mb-4">
+                                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Reset</span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="~/dashAssets/assets/img/elements/2.jpg" alt="Second slide" id="uploadedSlide2" />
+                                    <div class="carousel-caption d-none d-md-block" style="transform: translateY(-50%); bottom: initial; top: 50%;">
+                                        <p id="sub2" style="color: #F28123; font-weight: 700; text-transform: uppercase; letter-spacing: 7px; font-size: 11px;">Eos mutat malis maluisset et.</p>
+                                        <h2 id="main2">Second slide</h2>
+                                        <div class="button-wrapper">
+                                            <label for="upload2" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                                <span class="d-none d-sm-block">Upload new photo</span>
+                                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                                <input type="file"
+                                                       id="upload2"
+                                                       class="input2"
+                                                       hidden
+                                                       asp-for="ImageFile2"
+                                                       accept="image/png, image/jpeg" />
+                                            </label>
+                                            <button type="button" class="btn btn-outline-secondary reset2 mb-4">
+                                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Reset</span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="~/dashAssets/assets/img/elements/18.jpg" alt="Third slide" id="uploadedSlide3" />
+                                    <div class="carousel-caption d-none d-md-block" style="transform: translateY(-50%); bottom: initial; top: 50%;">
+                                        <p id="sub3" style="color: #F28123; font-weight: 700; text-transform: uppercase; letter-spacing: 7px; font-size: 11px;">Eos mutat malis maluisset et.</p>
+                                        <h2 id="main3">Third slide</h2>
+                                        <div class="button-wrapper">
+                                            <label for="upload3" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                                <span class="d-none d-sm-block">Upload new photo</span>
+                                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                                <input type="file"
+                                                       id="upload3"
+                                                       class="input3"
+                                                       hidden
+                                                       asp-for="ImageFile3"
+                                                       accept="image/png, image/jpeg" />
+                                            </label>
+                                            <button type="button" class="btn btn-outline-secondary reset3 mb-4">
+                                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Reset</span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="col-xl">
+                                <div class="card mb-4">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">Sliders Texts</h5>
+                                        <small class="text-muted float-end">Slides</small>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="slide1-sub">Sub Text</label>
+                                            <input asp-for="SubText1" type="text" class="form-control" id="slide1-sub" placeholder="First Slide"  onkeyup ="changesub1()"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="slide1-main">Main Text</label>
+                                            <input  asp-for="MainText1" type="text" class="form-control" id="slide1-main" placeholder="First Slide" onkeyup ="changemain1()"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="slide2-sub">Sub Text</label>
+                                            <input  asp-for="SubText2" type="text" class="form-control" id="slide2-sub" placeholder="Second slide" onkeyup ="changesub2()"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="slide2-main">Main Text</label>
+                                            <input asp-for="MainText2" type="text"  class="form-control" id="slide2-main" placeholder="Second slide"onkeyup ="changemain2()"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="slide3-sub">Sub Text</label>
+                                            <input asp-for="SubText3" type="text" class="form-control" id="slide3-sub" placeholder="Third slide" onkeyup ="changesub3()"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="slide3-main">Main Text</label>
+                                            <input asp-for="MainText3" type="text" class="form-control" id="slide3-main" placeholder="Third slide" onkeyup ="changemain3()"/>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </form>
+
+</div>
+
+<script>
+    'use strict';
+    function changesub1() {
+        var elementValue = document.getElementById('slide1-sub').value;
+        document.getElementById("sub1").innerHTML = elementValue;
+    }
+    function changesub2() {
+        var elementValue = document.getElementById('slide2-sub').value;
+        document.getElementById("sub2").innerHTML = elementValue;
+    }
+    function changesub3() {
+        var elementValue = document.getElementById('slide3-sub').value;
+        document.getElementById("sub3").innerHTML = elementValue;
+    }
+    function changemain1() {
+        var elementValue = document.getElementById('slide1-main').value;
+        document.getElementById("main1").innerHTML = elementValue;
+    }
+    function changemain2() {
+        var elementValue = document.getElementById('slide2-main').value;
+        document.getElementById("main2").innerHTML = elementValue;
+    }
+    function changemain3() {
+        var elementValue = document.getElementById('slide3-main').value;
+        document.getElementById("main3").innerHTML = elementValue;
+    }
+    document.addEventListener('DOMContentLoaded', function (e) {
+        
+        (function () {
+            // Update/reset user image of account page
+            let Image1 = document.getElementById('uploadedSlide1');
+            const fileInput = document.querySelector('.input1'),
+                resetFileInput = document.querySelector('.reset1');
+
+            if (Image1) {
+                const resetImage = Image1.src;
+                fileInput.onchange = () => {
+                    if (fileInput.files[0]) {
+                        Image1.src = window.URL.createObjectURL(fileInput.files[0]);
+                    }
+                };
+                resetFileInput.onclick = () => {
+                    fileInput.value = '';
+                    Image1.src = resetImage;
+                };
+            }
+            console.log("Cooolllll")
+        })();
+        (function () {
+
+            let Image2 = document.getElementById('uploadedSlide2');
+            const fileInput1 = document.querySelector('.input2'),
+                resetFileInput1 = document.querySelector('.reset2');
+
+            if (Image2) {
+                const resetImage1 = Image2.src;
+                fileInput1.onchange = () => {
+                    if (fileInput1.files[0]) {
+                        Image2.src = window.URL.createObjectURL(fileInput1.files[0]);
+                    }
+                };
+                resetFileInput1.onclick = () => {
+                    fileInput1.value = '';
+                    Image2.src = resetImage1;
+                };
+            }
+        })();
+        (function () {
+
+            let Image3 = document.getElementById('uploadedSlide3');
+            const fileInput2 = document.querySelector('.input3'),
+                resetFileInput2 = document.querySelector('.reset3');
+
+            if (Image3) {
+                const resetImage2 = Image3.src;
+                fileInput2.onchange = () => {
+                    if (fileInput2.files[0]) {
+                        Image3.src = window.URL.createObjectURL(fileInput2.files[0]);
+                    }
+                };
+                resetFileInput2.onclick = () => {
+                    fileInput2.value = '';
+                    Image3.src = resetImage2;
+                };
+            }
+        })();
+    });
+
+</script>

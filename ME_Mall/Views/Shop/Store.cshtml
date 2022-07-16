@@ -1,0 +1,125 @@
+﻿@model Tuple<IndexViewModel<ProductSubCat>, IEnumerable<string>>;
+
+@{
+    ViewData["Title"] = "Stores - "+ ViewBag.sName;
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg" style="background-image:url('../../Images/@ViewBag.storeCover')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>@ViewBag.storeStatement</p>
+                    <h1>@ViewBag.sName</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+<!-- products -->
+<div class="product-section mt-150 mb-150">
+    <div class="container">
+        <div class="row animated pulse">
+            <div class="col-md-12">
+                <div class="col-md-12" style="background-color: #022d3d; padding: 20px; border-radius: 25px">
+                    <form class="col-md-12" asp-action="Store" method="get">
+                        <input id="search1" class="col-md-10 mr-3" style="background-color: #bcccd1; color: dimgray; padding: 10px; margin-left: 10px; font-family: 'Open sans'; font-weight: 600; border-radius: 25px " type="search" name="product" placeholder="Search for a product" />
+                        <button type="submit" class="cart-btn">
+                            <i class="fas fa-search ml-2"></i>
+                            Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-filters">
+                    <ul>
+                        <li class="active" data-filter="*">All</li>
+                        @foreach (var item in Model.Item2)
+                        {
+                            var subCat = item.Replace(" ", "-");
+                            <li data-filter=".@subCat">@item</li>
+                        }
+                        </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row product-lists">
+            @foreach (var item in Model.Item1.Items)
+            {
+                var subCat = item.SubCategory.SubCategoryName.Replace(" ", "-");
+
+            <div class="col-lg-4 col-md-6 text-center @subCat">
+                
+                            <div class="single-product-item">
+                                <div class="product-image">
+                                    <a asp-action="ProductDetails" asp-controller="Shop" asp-route-id="@item.Product.Id"><img src="~/Images/@item.Product.ProductImage" alt=""></a>
+                                </div>
+                                <h3>@item.Product.Name</h3>
+                                <p class="product-price"><span>Per @item.Unit.UnitName</span>JOD @item.Product.Price</p>
+                                <a asp-controller="Shop" asp-action="addCart" asp-route-id="@item.Product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                            </div>
+                        </div>
+            }
+                
+            </div>
+
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="pagination-wrap">
+                            @*<ul>
+                        <li><a href="#">Prev</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a class="active" href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">Next</a></li>
+                    </ul>*@
+                            <!-- pager -->
+                            @if (Model.Item1.Pager.EndPage > 1)
+                            {
+                                <ul>
+                                    @if (Model.Item1.Pager.CurrentPage > 1)
+                                    {
+                                        <li>
+                                            <a href="~/Shop/Store/@ViewBag.sId"><i class="fas fa-arrow-left"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="~/Shop/Store/@ViewBag.sId?page=@(Model.Item1.Pager.CurrentPage - 1)">Prev</a>
+                                        </li>
+                                    }
+
+                                    @for (var p = Model.Item1.Pager.StartPage; p <= Model.Item1.Pager.EndPage; p++)
+                                    {
+                                        <li class="@(p == Model.Item1.Pager.CurrentPage ? "active" : "")">
+                                            <a href="~/Shop/Store/@ViewBag.sId?page=@p"> @p</a>
+                                        </li>
+                                    }
+
+                                    @if (Model.Item1.Pager.CurrentPage < Model.Item1.Pager.TotalPages)
+                                    {
+                                        <li>
+                                            <a href="~/Shop/Store/@ViewBag.sId?page=@(Model.Item1.Pager.CurrentPage + 1)">Next</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/Shop/Store/@ViewBag.sId?page=@(Model.Item1.Pager.TotalPages)"><i class="fas fa-arrow-right"></i></a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end products -->
+

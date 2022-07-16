@@ -1,0 +1,154 @@
+﻿@model ME_Mall.Models.Design
+
+@{
+    ViewData["Title"] = "Advertise Discounts";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<style>
+    .shop-banner {
+        position: relative;
+        background-color: #f5f5f5;
+        background-size: cover;
+        padding: 110px 0px 115px;
+    }
+
+        .shop-banner h3 {
+            position: relative;
+            font-size: 50px;
+            line-height: 1.2em;
+            margin-bottom: 0px;
+            color:#000;
+            font-weight:bolder
+        }
+
+        .shop-banner .sale-percent {
+            position: relative;
+            font-size: 60px;
+            font-weight: 700;
+            color: #F28123;
+        }
+    #discount {
+        font-size: 60px;
+        font-weight: 700;
+        color: #F28123;
+    }
+
+    .shop-banner .sale-percent span {
+        position: relative;
+        font-size: 24px;
+        line-height: 1.1em;
+        color: #051922;
+        font-weight: 400;
+        text-align: center;
+        margin-right: 10px;
+        display: inline-block;
+    }
+    a.cart-btn {
+        border-radius: 50px;
+        border-color: transparent;
+        background-color: #F28123;
+        color:#fff
+    }
+        a.cart-btn:hover {
+            background-color: #051922;
+            color: #F28123;
+        }
+    .orange-text {
+        color: #F28123;
+    }
+   
+</style>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <form enctype="multipart/form-data" asp-action="AdvertiseDiscounts" method="post">
+        <div class="card">
+            <section class="shop-banner" id="display-image" style=" background-image: url('/dashAssets/assets/img/elements/3.jpg'); ">
+                <div class="container">
+                    <h3><span id="part1">Text 1 here</span> <br><span id="part2">Text 2 here</span> <span id="orange" class="orange-text">Orange word/words</span></h3>
+                    <div class="sale-percent"><span>Sale! <br> Upto</span><span id="discount">50% </span><span>off</span></div>
+                    <a href="shop.html" class="cart-btn btn-lg">Shop Now</a>
+                </div>
+            </section>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="col-xl">
+                            <div class="card mb-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">Promo code advertisement</h5>
+                                    <small class="text-muted float-end">This ad will be shown to the user on the home page and on the about page</small>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-1">
+                                        <label for="image-input" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                            <span class="d-none d-sm-block">Upload new photo</span>
+                                            <i class="bx bx-upload d-block d-sm-none"></i>
+                                            <input type="file" asp-for="ImageFile1" hidden id="image-input" accept="image/jpeg, image/png, image/jpg">
+                                        </label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="slide1-sub">Text 1</label>
+                                        <input asp-for="SubText1" type="text" class="form-control" id="slide1-sub" placeholder="For best result write at maximum 5 words" onkeyup="changesub1()" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="slide1-main">Text 2</label>
+                                        <input asp-for="MainText1" type="text" class="form-control" id="slide1-main" placeholder="For best result write at maximum 4 words" onkeyup="changemain1()" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="slide2-sub">Orange Text</label>
+                                        <input asp-for="SubText2" type="text" class="form-control" id="slide2-sub" placeholder="For best result write only 1 word (used for writing a promo code or special word)" onkeyup="changesub2()" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="slide2-main">Discount Number</label>
+                                        <input asp-for="MainText2" type="text" class="form-control" id="slide2-main" placeholder="Write the discount value followed by %" onkeyup="changemain2()" />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+<script>
+    'use strict';
+    const image_input = document.querySelector("#image-input");
+    image_input.addEventListener("change", function () {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            const uploaded_image = reader.result;
+            document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+        });
+        reader.readAsDataURL(this.files[0]);
+    });
+    function changesub1() {
+        var elementValue = document.getElementById('slide1-sub').value;
+        document.getElementById("part1").innerHTML = elementValue;
+    }
+    function changesub2() {
+        var elementValue = document.getElementById('slide2-sub').value;
+        document.getElementById("orange").innerHTML = elementValue;
+    }
+    function changesub3() {
+        var elementValue = document.getElementById('slide3-sub').value;
+        document.getElementById("sub3").innerHTML = elementValue;
+    }
+    function changemain1() {
+        var elementValue = document.getElementById('slide1-main').value;
+        document.getElementById("part2").innerHTML = elementValue;
+    }
+    function changemain2() {
+        var elementValue = document.getElementById('slide2-main').value;
+        document.getElementById("discount").innerHTML = elementValue;
+    }
+    function changemain3() {
+        var elementValue = document.getElementById('slide3-main').value;
+        document.getElementById("main3").innerHTML = elementValue;
+    }
+        
+</script>

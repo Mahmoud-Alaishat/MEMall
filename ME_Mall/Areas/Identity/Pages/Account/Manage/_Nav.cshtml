@@ -1,0 +1,109 @@
+﻿@inject SignInManager<ME_Mall.Models.User> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<style>
+    .menu-link.active {
+        background-color: #F28123;
+        font-weight: bold;
+    }
+    .menu-link.active div {
+        font-weight: bold;
+        color: white
+    }
+        .menu-link.active i {
+            font-weight: bold;
+            color: white
+        }
+    .menu-link div, .menu-icon {
+        color: black
+    }
+
+</style>
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a asp-action="Index" asp-controller="Home" class="app-brand-link">
+            <img src="~/dashAssets1/assets/img/icons/brands/meMallLogoDash.png" alt="" width="170" height="45">
+        </a>
+
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+    </div>
+
+    <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1">
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Profile</span></li>
+        <li class="menu-item">
+            <a asp-page="./Index" class="menu-link @ManageNavPages.IndexNavClass(ViewContext)">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Analytics">Profile</div>
+            </a>
+        </li>
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Orders</span></li>
+        <li class="menu-item">
+            <a asp-page="Orders" class="menu-link @ManageNavPages.OrdersNavClass(ViewContext)">
+                <i class="menu-icon tf-icons bx bxs-shopping-bags"></i>
+                <div data-i18n="Analytics">Orders</div>
+            </a>
+        </li>
+
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Email</span></li>
+        <li class="menu-item ">
+            <a asp-page="./Email" class="menu-link @ManageNavPages.EmailNavClass(ViewContext)">
+                <i class="menu-icon tf-icons bx bx-mail-send"></i>
+                <div data-i18n="Analytics">Email</div>
+            </a>
+        </li>
+
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Password </span></li>
+        <li class="menu-item">
+            <a asp-page="./ChangePassword" class="menu-link @ManageNavPages.ChangePasswordNavClass(ViewContext)">
+                <i class="menu-icon tf-icons bx bx-lock-open"></i>
+                <div data-i18n="Analytics">Password</div>
+            </a>
+        </li>
+        @if (hasExternalLogins)
+        {
+            <li class="menu-item">
+                <a asp-page="./ExternalLogins" class="menu-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)">
+                    <i class="menu-icon tf-icons bx bx-log-in-circle"></i>
+                    <div data-i18n="Analytics">External logins</div>
+                </a>
+            </li>
+        }
+
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Two-factor authentication </span></li>
+        <li class="menu-item">
+            <a asp-page="./TwoFactorAuthentication" class="menu-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)">
+                <i class="menu-icon tf-icons bx bx-lock"></i>
+                <div data-i18n="Analytics">Two-factor authentication</div>
+            </a>
+        </li>
+
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Personal data </span></li>
+        <li class="menu-item">
+            <a asp-page="./PersonalData" class="menu-link @ManageNavPages.PersonalDataNavClass(ViewContext)">
+                <i class="menu-icon tf-icons bx bx-data"></i>
+                <div data-i18n="Analytics">Personal data</div>
+            </a>
+        </li>
+        @*<li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">Account Settings</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a asp-area="Identity" asp-page="/Account/Manage/Index" class="menu-link">
+                        <div data-i18n="Account">Account</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>*@
+
+    </ul>
+</aside>

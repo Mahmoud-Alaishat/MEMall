@@ -1,0 +1,133 @@
+﻿@page
+@model Ataa.Areas.Identity.Pages.Account.Manage.OrderModel
+@{
+    ViewData["Title"] = "Orders";
+    ViewData["ActivePage"] = ManageNavPages.Orders;
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<style>
+    .dt-buttons {
+        margin-left: 16px;
+        width:64%
+    }
+    div.dataTables_wrapper div.dataTables_filter {
+        text-align: right;
+        margin-left: 30px;
+        margin-right: 16px;
+        width: 25%;
+        display: inline
+    }
+    #example_length {
+        margin-left: 30px;
+        display: inline;
+        width:25%
+    }
+    div.dataTables_wrapper div.dataTables_info {
+        padding-top: 0.85em;
+        margin-left: 16px;
+    }
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        margin-right: 16px;
+        margin-bottom:10px;
+        white-space: nowrap;
+        justify-content: flex-end;
+    }
+</style>
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    
+    <!-- Basic Bootstrap Table -->
+    <div class="card">
+        <h5 class="card-header">Orders</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table" id="example">
+                <thead>
+                    <tr>
+                        <th>
+                            Order Id
+                        </th>
+
+                        <th>
+                            Order Date
+                        </th>
+                        <th>
+                            Order Status
+                        </th>
+                        <th>
+                            Total Price
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model.Orders)
+                    {
+                        <tr>
+                            <td>
+                                <i class="fab fa-react fa-lg text-info me-1"></i> <strong>@Html.DisplayFor(modelItem => item.order.Id)</strong>
+                            </td>
+                            <td>
+                                <i class="fab fa-react fa-lg text-info me-1"></i> <strong>@Html.DisplayFor(modelItem => item.order.OrderDate)</strong>
+                            </td>
+                            <td>
+                                @{
+                                    string sta = item.Status.StatusName;
+
+                                    if (sta == "On progress")
+                                    {
+                                        <span class="badge bg-label-info">@Html.DisplayFor(modelItem => item.Status.StatusName) </span>
+                                    }
+                                    else if (sta == "On delivering")
+                                    {
+                                        <span class="badge bg-label-dark">@Html.DisplayFor(modelItem => item.Status.StatusName) </span>
+                                    }
+                                    else if (sta == "Delivered")
+                                    {
+                                        <span class="badge bg-label-primary">@Html.DisplayFor(modelItem => item.Status.StatusName) </span>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                <i class="fab fa-react fa-lg text-info me-1"></i> <strong>@Html.DisplayFor(modelItem => item.order.TotalPrice)</strong>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <i class="fab fa-react fa-lg text-info me-3"></i>
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" asp-page="./OrderDetails" asp-route-id="@item.order.Id"><i class="bx bx-detail me-1"></i> Details</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let table = new DataTable('#example', {
+            dom: 'Blfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ],
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All'],
+            ]
+        });
+    });
+    
+</script>

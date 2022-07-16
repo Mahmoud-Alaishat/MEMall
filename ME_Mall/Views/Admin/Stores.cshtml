@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ME_Mall.Models.StoreOwner>
+
+@{
+    ViewData["Title"] = "View Stores";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Stores /</span> View stores</h4>
+    <p>
+        <a class="btn btn-outline-primary" asp-action="CreateStore">Create New</a>
+    </p>
+    <!-- Basic Bootstrap Table -->
+    <div class="card">
+        <h5 class="card-header">Stores</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Store Name
+                        </th>
+                        <th>
+                            Owner Name
+                        </th>
+                        <th>
+                            Store Category
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            <i class="fab fa-react fa-lg text-info me-1"></i> <strong>@Html.DisplayFor(modelItem => item.Store.Id)</strong>
+                        </td>
+                        <td>
+                            <i class="fab fa-react fa-lg text-info me-1"></i> <strong>@Html.DisplayFor(modelItem => item.Store.StoreName)</strong>
+                        </td>
+                        <td>
+                            <i class="fab fa-react fa-lg text-info me-3"></i> <strong>@Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)</strong>
+                        </td>
+                        <td>
+                            <i class="fab fa-react fa-lg text-info me-3"></i> <strong>@Html.DisplayFor(modelItem => item.Category.CategoryName)</strong>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-action="EditStore" asp-route-id="@item.Store.Id"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    <a class="dropdown-item" asp-action="DeleteStore" asp-route-id="@item.Store.Id"><i class="bx bx-trash me-1"></i> Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

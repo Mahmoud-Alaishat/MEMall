@@ -1,0 +1,132 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+
+
+<h4 class="mb-2 mt-3 d-flex justify-content-center font-monospace" style="color: #F28123">
+    <i style="color: #F28123" class="bx bx-downvote bx-fade-down bx-md"></i>
+    Adventure starts here 
+    <i style="color: #F28123" class="bx bx-downvote bx-fade-down bx-md"></i> 
+</h4>
+<p class="mb-4">Make your Shopping easy and fun!</p>
+
+<form asp-route-returnUrl="@Model.ReturnUrl" enctype="multipart/form-data" id="formAuthentication" class="mb-3" method="POST">
+    <div asp-validation-summary="All" style="color: #F28123"></div>
+    <div class="form-group d-flex justify-content-center gap-3">
+        <div class="mb-3 col-5">
+            <label asp-for="Input.FirstName" class="form-label"></label>
+            <input 
+                   class="form-control"
+                   id="username"
+                   placeholder="Enter your first name"
+                   asp-for="Input.FirstName"
+                   autofocus />
+        </div>
+        <div class="mb-3 col-5">
+            <label asp-for="Input.LastName" class="form-label"></label>
+            <input 
+                   class="form-control"
+                   id="username"
+                   placeholder="Enter your last name"
+                   asp-for="Input.LastName"
+                   autofocus />
+        </div>
+    </div>
+    <div class="form-group d-flex justify-content-center gap-3">
+        <div class="mb-3  col-5">
+            <label asp-for="Input.UserName" class="form-label"></label>
+            <input 
+                   class="form-control"
+                   id="username"
+                   placeholder="Enter your username"
+                   asp-for="Input.UserName"
+                   autofocus />
+        </div>
+        <div class="mb-3  col-5">
+            <label asp-for="Input.PhoneNumber" class="form-label"></label>
+            <input 
+                   class="form-control"
+                   id="username"
+                   placeholder="Enter your phone number"
+                   asp-for="Input.PhoneNumber"
+                   autofocus />
+        </div>
+        
+    </div>
+    <div class="form-group d-flex justify-content-center gap-3">
+        <div class="mb-3  col-5">
+            <label asp-for="Input.Email" class="form-label">Email</label>
+            <input class="form-control" id="email" asp-for="Input.Email" placeholder="Enter your email" />
+        </div>
+        <div class="mb-3  col-5">
+            <label asp-for="Input.ImageFile" class="form-label"></label>
+            <input 
+                   class="form-control"
+                   id="username"
+                   placeholder="Enter your username"
+                   asp-for="Input.ImageFile"
+                   autofocus accept="image/*" />
+        </div>
+    </div>
+    <div class="form-group d-flex justify-content-center gap-3">
+        <div class="mb-3 form-password-toggle  col-5">
+            <label class="form-label" asp-for="Input.Password"></label>
+            <div class="input-group input-group-merge">
+                <input 
+                       id="password"
+                       class="form-control"
+                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                       aria-describedby="password"
+                       asp-for="Input.Password" />
+                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+            </div>
+        </div>
+
+        <div class="mb-3 form-password-toggle  col-5">
+            <label class="form-label" asp-for="Input.ConfirmPassword"></label>
+            <div class="input-group input-group-merge">
+                <input 
+                       id="password"
+                       class="form-control"
+                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                       aria-describedby="password"
+                       asp-for="Input.ConfirmPassword" />
+                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group d-flex justify-content-center">
+        <div class="mb-3  col-10">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
+                <label class="form-check-label" for="terms-conditions">
+                    I agree to
+                    <a href="javascript:void(0);">privacy policy & terms</a>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary d-grid  col-5">Sign up</button>
+        </div>
+</form>
+
+<p class="text-center">
+    <span>Already have an account?</span>
+    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">
+        <span>Sign in instead</span>
+    </a>
+</p>
+
+
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

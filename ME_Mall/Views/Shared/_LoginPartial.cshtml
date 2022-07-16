@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@if (SignInManager.IsSignedIn(User))
+{
+    @*<li class="nav-item">
+            <a class="nav-link text-white ml-4" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name!</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn text-white mb-2 w-auto border-white rounded">Logout</button>
+            </form>
+        </li>*@
+
+    <li>
+        <a href="#">
+            <div>
+                <img style="width:45px;height:45px;border-radius:50px;margin-right:5px" src="~/Images/@ViewBag.profileImage" alt="image">
+                <span style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-weight:500">@ViewBag.fullname</span>
+            </div>
+        </a>
+        <ul class="sub-menu">
+            @*<li>
+            <a class="nav-link scrollto" asp-controller="RequestForms" asp-action="Profile">Profile</a>
+        </li>
+        <li>
+            <a class="nav-link scrollto" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Settings</a>
+        </li>*@
+            @if (User.IsInRole("User"))
+            {
+
+                <li><a style="font-size:15px" asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fas fa-user mr-3"></i>My Profile</a></li>
+                <li><a style="font-size:15px" asp-area="Identity" asp-page="/Account/Manage/Orders"><i class="fas fa-shopping-bag mr-3"></i>My Orders</a></li>
+                <li><a style="font-size:15px" asp-area="Identity" asp-page="/Account/Manage/Email"><i class="fas fa-boxes mr-3"></i>Settings</a></li>
+
+                <hr />
+            }
+            <li>
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="btn btn-danger w-100 font-weight-bold"><i class="fas fa-power-off mr-2"></i>Logout</button>
+                </form>
+            </li>
+
+        </ul>
+    </li>
+
+
+}
+else
+{
+    <li>
+        <a class="boxed-btn" asp-area="Identity" asp-page="/Account/Login">Sign In</a>
+        <a class="boxed-btn" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+
+}

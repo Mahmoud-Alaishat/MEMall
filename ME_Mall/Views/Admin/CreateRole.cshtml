@@ -1,0 +1,30 @@
+﻿@model CreateRoleViewModel
+
+@{
+    ViewData["Title"] = "Account settings";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="col-md-6 grid-margin stretch-card pt-4 pb-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="clearfix">
+                <h4 class="card-title d-flex justify-content-center mb-4">Create Role</h4>
+                <hr />
+            </div>
+            <div class="col">
+                <form asp-action="CreateRole">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="RoleName" class="control-label font-weight-bold text-black-50"></label>
+                        <input asp-for="RoleName" class="form-control" />
+                        <span asp-validation-for="RoleName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-center">
+                        <input type="submit" value="Create" class="btn btn-success btn-lg" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

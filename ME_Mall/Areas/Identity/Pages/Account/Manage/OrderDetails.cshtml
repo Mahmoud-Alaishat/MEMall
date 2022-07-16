@@ -1,0 +1,126 @@
+﻿@page
+@model Ataa.Areas.Identity.Pages.Account.Manage.OrderDetailsModel
+@{
+    ViewData["Title"] = "Order Details";
+    ViewData["ActivePage"] = ManageNavPages.Orders;
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<style>
+    .dt-buttons {
+        margin-top:8px;
+        margin-left: 16px;
+    }
+
+</style>
+
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <!-- Basic Bootstrap Table -->
+    <div class="card">
+        <div class="table-responsive text-nowrap">
+            <table class="table" id="example" style="width:100%">
+                <caption style="caption-side:top;margin-left:17px">
+                    <h6 class="text-muted mt-4 mb-0 mr-3">Order ID: @Model.Order.Select(x => x.order.Id).First()</h6><br />
+                    <h6 class="text-muted mb-0 mr-3">Order Date: @Model.Order.Select(x => x.order.OrderDate).First()</h6><br />
+                    <h6 class="text-muted mb-2 mr-3">Order Address: @Model.Order.Select(x => x.order.OrderAddress).First()</h6>
+                </caption>
+                <thead>
+                    <tr>
+                        <th>
+                            Product Name
+                        </th>
+
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                            Grand Total
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model.Order)
+                    {
+                        <tr>
+                            <td>
+                                <i class="fab fa-react fa-lg text-info "></i> <strong>@Html.DisplayFor(modelItem => item.product.Name)</strong>
+                            </td>
+                            <td>
+                                <i class="fab fa-react fa-lg text-info me-1"></i> <strong>@Html.DisplayFor(modelItem => item.product.Price)</strong>
+                            </td>
+                            <td>
+                                @{
+                                    string unit = item.Unit.UnitName;
+                                    List<string> u = new List<string> { "Kg" };
+                                    if (u.Contains(unit))
+                                    {
+                                        <i class="fab fa-react fa-lg text-info me-1"></i> <strong>@Html.DisplayFor(modelItem => item.orderProduct.Value)</strong>
+                                    }
+                                    else
+                                    {
+                                        <i class="fab fa-react fa-lg text-info me-1"></i> <strong>@Html.DisplayFor(modelItem => item.orderProduct.Quantity)</strong>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                <i class="fab fa-react fa-lg text-info me-1"></i> <strong>@Html.DisplayFor(modelItem => item.orderProduct.Total)</strong>
+                            </td>
+                        </tr>
+                    }
+                    <tr class="table-info">
+                        <td>
+                            <i class="fab fa-react fa-lg text-info "></i> <strong>Shipping</strong>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <i class="fab fa-react fa-lg text-info me-2"></i> <strong>2</strong>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="table-dark" style="width:100%">
+                    <tr>
+                        <td>
+                            <i class="fab fa-react fa-lg text-info"></i> <strong>Order Total: @Model.Order.Select(x => x.order.TotalPrice).First() JOD</strong>
+                            @*<h6 class="fab fa-react fa-lg text-info me-1">Order Total: @Model.Order.Select(x => x.order.TotalPrice).First() JOD</h6>*@
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <a asp-page="./Orders" class="btn btn-secondary w-100"><i class="bx bx-arrow-back bx-tada"></i> Back</a>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let table = new DataTable('#example', {
+            dom: 'Bfrtip',
+            buttons: [
+                { extend: 'copyHtml5', footer: true },
+                { extend: 'excelHtml5', footer: true },
+                { extend: 'csvHtml5', footer: true },
+                { extend: 'pdfHtml5', footer: true },
+
+            ],
+            paging: false,
+            ordering: false,
+            info: false,
+            searching: false
+        });
+    });
+
+</script>

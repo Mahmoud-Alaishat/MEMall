@@ -1,0 +1,155 @@
+﻿@model ME_Mall.Models.User
+
+@{
+    ViewData["Title"] = "Create User";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Users/</span> Create User</h4>
+
+    <!-- Basic Layout & Basic with Icons -->
+    <div class="row">
+        
+        <!-- Basic with Icons -->
+        <div class="col-xxl">
+            <div class="card mb-4">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Users Form</h5>
+                    <small class="text-muted float-end">Users</small>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateUser" enctype="multipart/form-data" method="post">
+                        <div asp-validation-summary="All"></div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" asp-for="FirstName" for="basic-icon-default-fullname"></label>
+                            <div class="col-sm-10">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="bx bx-user"></i>
+                                    </span>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="basic-icon-default-fullname"
+                                           placeholder="Enter first name"
+                                           aria-label="Enter first name"
+                                           asp-for="FirstName"
+                                           aria-describedby="basic-icon-default-fullname2" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" asp-for="LastName" for="basic-icon-default-fullname"></label>
+                            <div class="col-sm-10">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="bx bx-user"></i>
+                                    </span>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="basic-icon-default-fullname"
+                                           placeholder="Enter last name"
+                                           aria-label="Enter last name"
+                                           asp-for="LastName"
+                                           aria-describedby="basic-icon-default-fullname2" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" asp-for="UserName" for="basic-icon-default-fullname"></label>
+                            <div class="col-sm-10">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="bx bx-user"></i>
+                                    </span>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="basic-icon-default-fullname"
+                                           placeholder="Enter username name"
+                                           aria-label="Enter username name"
+                                           asp-for="UserName"
+                                           aria-describedby="basic-icon-default-fullname2" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" asp-for="Email" for="basic-icon-default-email"></label>
+                            <div class="col-sm-10">
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                    <input type="text"
+                                           id="basic-icon-default-email"
+                                           class="form-control"
+                                           placeholder="Enter email"
+                                           aria-label="Enter email"
+                                           asp-for="Email"
+                                           aria-describedby="basic-icon-default-email2" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 form-label" asp-for="PhoneNumber" for="basic-icon-default-phone"></label>
+                            <div class="col-sm-10">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-phone2" class="input-group-text">
+                                        <i class="bx bx-phone"></i>
+                                    </span>
+                                    <input type="text"
+                                           id="basic-icon-default-phone"
+                                           class="form-control phone-mask"
+                                           placeholder="Enter phone number"
+                                           aria-label="Enter phone number"
+                                           asp-for="PhoneNumber"
+                                           aria-describedby="basic-icon-default-phone2" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" asp-for="ImageFile" for="basic-icon-default-fullname">Profile Image</label>
+                            <div class="col-sm-10">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="bx bx-image-add"></i>
+                                    </span>
+                                    <input class="form-control"
+                                           id="basic-icon-default-fullname"
+                                           asp-for="ImageFile"
+                                           aria-describedby="basic-icon-default-fullname2" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-password32">Password</label>
+                                <div class="col-sm-10 form-password-toggle">
+                                    <div class="input-group input-group-merge">
+                                        <input type="password"
+                                               class="form-control"
+                                               id="basic-default-password32"
+                                               name="password"
+                                               placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                               aria-describedby="basic-default-password" />
+                                        <span class="input-group-text cursor-pointer" id="basic-default-password">
+                                            <i class="bx bx-hide"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                        </div>
+                            <div class="row justify-content-end">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,64 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+
+<!-- /Logo -->
+<h4 class="mb-2 mt-3 d-flex justify-content-center font-monospace" style="color: #F28123">
+    <i style="color: #F28123" class="bx bx-downvote bx-fade-down bx-md"></i>
+    Welcome to MEMall
+    <i style="color: #F28123" class="bx bx-downvote bx-fade-down bx-md"></i>
+</h4>
+<p class="mb-4">Please sign-in to your account and start the adventure</p>
+
+<form id="formAuthentication" class="mb-3" method="POST">
+    <div asp-validation-summary="All" style="color: #F28123"></div>
+    <div class="mb-3">
+        <label asp-for="Input.Email" class="form-label"></label>
+        <input type="text"
+               class="form-control"
+               id="email"
+               placeholder="Enter your email"
+               autofocus asp-for="Input.Email" />
+    </div>
+    <div class="mb-3 form-password-toggle">
+        <div class="d-flex justify-content-between">
+            <label class="form-label" asp-for="Input.Password"></label>
+            <a asp-page="./ForgotPassword">
+                <small>Forgot Password?</small>
+            </a>
+        </div>
+        <div class="input-group input-group-merge">
+            <input type="password"
+                   id="password"
+                   class="form-control"
+                   placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                   aria-describedby="password" asp-for="Input.Password" />
+            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" asp-for="Input.RememberMe" id="remember-me" />
+            <label class="form-check-label" asp-for="Input.RememberMe" for="remember-me"> Remember Me </label>
+        </div>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+    </div>
+</form>
+
+<p class="text-center">
+    <span>New on our platform?</span>
+    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">
+        <span>Create an account</span>
+    </a>
+</p>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

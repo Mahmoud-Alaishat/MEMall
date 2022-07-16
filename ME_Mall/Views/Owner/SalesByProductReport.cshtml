@@ -1,0 +1,102 @@
+﻿@model IEnumerable<ME_Mall.Controllers.OwnerController.SalesByProductReportData>
+
+@{
+    ViewData["Title"] = "SalesByProductReport";
+    Layout = "~/Views/Shared/_OwnerLayout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <div class="col-xl ">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Sales By Product Report</h5>
+                <small class="text-muted float-end">Reports</small>
+            </div>
+            <div class="card-body">
+                <form asp-action="SalesByProductReport">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-md-1 col-form-label" for="basic-default-fullname">Start Date</label>
+                        <div class="col-sm-10 col-md-11">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text">
+                                    <i class="bx bx-calendar"></i>
+                                </span>
+                                <input type="date" class="form-control" name="startDate" id="basic-default-fullname" placeholder="Enter SubCategory Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-md-1 col-form-label" for="basic-default-fullname">End Date</label>
+                        <div class="col-sm-10 col-md-11">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text">
+                                    <i class="bx bx-calendar"></i>
+                                </span>
+                                <input type="date" class="form-control" name="endDate" id="basic-default-fullname" placeholder="Enter SubCategory Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-md-1 col-form-label" for="products">Product</label>
+                        <div class="col-sm-10 col-md-11">
+                            <div class="input-group input-group-merge">
+                                <span id="stores" class="input-group-text">
+                                    <i class="bx bx-store"></i>
+                                </span>
+                                <select class="form-select" id="products" name="product" asp-items="@(new SelectList(ViewBag.message,"Id","Name"))"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bx bx-search"></i>
+                            Search
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!-- Basic Bootstrap Table -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Products Sales</h5>
+            <p class="text-muted float-end">@ViewBag.Date</p>
+        </div>
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Product Name
+                        </th>
+                        <th>
+                            Total Sales
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <i class="fab fa-react fa-lg text-info me-1"></i> <strong>@Html.DisplayFor(modelItem => item.ProductName)</strong>
+                            </td>
+                            <td>
+                                <i class="fab fa-react fa-lg text-info me-3"></i> <strong>@Html.DisplayFor(modelItem => item.Sales)</strong>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

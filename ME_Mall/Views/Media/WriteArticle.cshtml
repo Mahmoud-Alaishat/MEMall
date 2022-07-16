@@ -1,0 +1,489 @@
+﻿@model ME_Mall.Models.NewsAndArticles
+@{
+    ViewData["Title"] = "Write Article";
+    Layout = "~/Views/Shared/_ContentWriterLayout.cshtml";
+}
+<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" />
+
+<style>
+    .shop-banner {
+        position: relative;
+        background-color: #f5f5f5;
+        background-size: cover;
+        padding: 110px 0px 115px;
+    }
+
+        .shop-banner h3 {
+            position: relative;
+            font-size: 50px;
+            line-height: 1.2em;
+            margin-bottom: 0px;
+            color: #000;
+            font-weight: bolder
+        }
+
+        .shop-banner .sale-percent {
+            position: relative;
+            font-size: 60px;
+            font-weight: 700;
+            color: #F28123;
+        }
+
+    #discount {
+        font-size: 60px;
+        font-weight: 700;
+        color: #F28123;
+    }
+
+    .shop-banner .sale-percent span {
+        position: relative;
+        font-size: 24px;
+        line-height: 1.1em;
+        color: #051922;
+        font-weight: 400;
+        text-align: center;
+        margin-right: 10px;
+        display: inline-block;
+    }
+
+    a.cart-btn {
+        border-radius: 50px;
+        border-color: transparent;
+        background-color: #F28123;
+        color: #fff
+    }
+
+        a.cart-btn:hover {
+            background-color: #051922;
+            color: #F28123;
+        }
+
+    .orange-text {
+        color: #F28123;
+    }
+
+
+    .latest-news-bg {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+        background-color: #ddd;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .single-latest-news h3 {
+        font-size: 20px;
+        line-height: 1.25em;
+        font-weight: 600;
+    }
+
+        .single-latest-news h3 a {
+            color: #051922;
+        }
+
+    p.blog-meta span {
+        margin-right: 15px;
+        opacity: 0.6;
+        color: #051922;
+        font-size: 0.85em;
+    }
+
+        p.blog-meta span:last-child {
+            margin-right: 0;
+        }
+
+        p.blog-meta span i {
+            margin-right: 5px;
+        }
+
+    p.excerpt {
+        line-height: 1.8;
+        color: #555;
+    }
+
+    .latest-news a.boxed-btn {
+        margin-top: 80px;
+    }
+
+    .news-text-box {
+        padding: 25px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    .single-latest-news {
+        margin-bottom: 30px;
+    }
+
+    .single-artcile-bg {
+        background-size: cover;
+        background-position: center;
+        background-color: #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        background-image: url(http://placehold.jp/597x450.png);
+        height: 450px;
+    }
+
+    .single-article-text h2 {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+
+    .single-article-text p {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #051922;
+    }
+
+    .comments-list-wrap {
+        margin: 100px 0;
+    }
+
+        .comments-list-wrap h3 {
+            font-size: 25px;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
+
+    .comment-template h4 {
+        font-size: 25px;
+        font-weight: 600;
+        margin-bottom: 50px;
+    }
+
+    .single-comment-body {
+        position: relative;
+    }
+
+    .comment-user-avater {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+        .comment-user-avater img {
+            width: 60px;
+            max-width: 60px;
+            border-radius: 50%;
+        }
+
+    .comment-text-body {
+        padding-left: 80px;
+        margin-bottom: 40px;
+    }
+
+        .comment-text-body h4 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+    span.comment-date {
+        opacity: 0.5;
+        font-size: 80%;
+        font-weight: 700;
+        margin-left: 5px;
+    }
+
+    .comment-text-body h4 a {
+        color: #051922;
+        font-size: 80%;
+        margin-left: 10px;
+        border-bottom: 1px solid #aaa;
+    }
+
+    .single-comment-body.child {
+        margin-left: 75px;
+    }
+
+    .comment-text-body p {
+        color: #888;
+        line-height: 2;
+        margin: 0;
+    }
+
+    .comment-template h4 {
+        margin-bottom: 10px;
+    }
+
+    .comment-template > p {
+        opacity: 0.7;
+        margin-bottom: 30px;
+    }
+
+    .comment-template form p input[type=text] {
+        border: 1px solid #ddd;
+        width: 49%;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 15px;
+        color: #051922;
+    }
+
+    .comment-template form p input[type=email] {
+        border: 1px solid #ddd;
+        width: 49%;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 15px;
+        color: #051922;
+        margin-left: 10px;
+    }
+
+    .comment-template form p textarea {
+        border: 1px solid #ddd;
+        padding: 15px;
+        font-size: 15px;
+        color: #051922;
+        border-radius: 5px;
+        height: 250px;
+        resize: none;
+        width: 100%;
+    }
+
+    .sidebar-section {
+        margin-left: 30px;
+    }
+
+        .sidebar-section h4 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-section ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+            .sidebar-section ul li {
+                line-height: 1.5;
+            }
+
+                .sidebar-section ul li a {
+                    color: #555;
+                    font-size: 15px;
+                    pointer-events: none
+                }
+
+        .sidebar-section > div {
+            margin-bottom: 60px;
+        }
+
+            .sidebar-section > div:last-child {
+                margin-bottom: 0;
+            }
+
+    .recent-posts ul li, .archive-posts ul li {
+        position: relative;
+        padding-left: 17px;
+        margin-bottom: 10px;
+    }
+
+        .recent-posts ul li:before, .archive-posts ul li:before {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            content: "\f105";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+
+    .tag-section ul li {
+        display: inline-block;
+    }
+
+        .tag-section ul li a {
+            background-color: #ddd;
+            padding: 3px 10px;
+            display: block;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            margin-right: 5px;
+        }
+  .mt-150 {
+  margin-top: 50px;
+}
+
+.mb-150 {
+  margin-bottom: 30px;
+}
+    #part2 {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+    }
+</style>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <form enctype="multipart/form-data" asp-action="WriteArticle" method="post">
+        <div class="card">
+            <section class="shop-banner"  style=" background-image: url('/dashAssets/assets/img/elements/Be Creative Be You.png');border-radius:6px ">
+                <div class="container">
+                </div>
+            </section>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="col-xl">
+                            <div class="card mb-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">Write article</h5>
+                                    <small class="text-muted float-end">This article will be shown to the user on the home page and on the news page</small>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-1">
+                                        <label for="image-input" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                            <span class="d-none d-sm-block">Upload article photo</span>
+                                            <i class="bx bx-upload d-block d-sm-none"></i>
+                                            <input type="file" asp-for="ImageFile" hidden id="image-input" accept="image/jpeg, image/png, image/jpg" required>
+                                        </label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="slide1-sub">Article Title</label>
+                                        <input asp-for="Title" type="text" class="form-control" id="slide1-sub" placeholder="Write your article's title here" onkeyup="changesub1()" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="slide1-main">Article Text</label>
+                                        <textarea rows="16" asp-for="Text" type="text" class="form-control" id="slide1-main" placeholder="Write your article here" onkeyup="changemain1()" required></textarea>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="btn-group">
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#fullscreenModal" class="btn btn-secondary"><i class="bx bxs-show"></i> Preview</button>
+                                            <button type="submit" class="btn btn-primary"><i class="bx bx-rocket"></i> Post</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<div class="mt-3">
+    <!-- Modal -->
+    <div class="modal fade" id="fullscreenModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalFullTitle">Preview Mode</h5>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mt-150 mb-150">
+                        <div class="w-75" style="margin:0 auto">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="single-article-section">
+                                        <div class="single-article-text">
+                                            <div class="single-artcile-bg" id="display-image"></div>
+                                            <p class="blog-meta">
+                                                <span class="author"><i class="fas fa-user"></i> @ViewBag.fullname</span>
+                                                <span class="date">
+                                                    <i class="fas fa-calendar"></i> @DateTime.Now.Day @ViewBag.month, @DateTime.Now.Year
+                                                </span>
+                                            </p>
+                                            <h2 id="part1" style="color:black;font-weight:bold">Pomegranate can prevent heart disease</h2>
+                                            <p id="part2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint soluta, similique quidem fuga vel voluptates amet doloremque corrupti. Perferendis totam voluptates eius error fuga cupiditate dolorum? Adipisci mollitia quod labore aut natus nobis. Rerum perferendis, nobis hic adipisci vel inventore facilis rem illo, tenetur ipsa voluptate dolorem, cupiditate temporibus laudantium quidem recusandae expedita dicta cum eum. Quae laborum repellat a ut, voluptatum ipsa eum. Culpa fugiat minus laborum quia nam!</p>
+                                        </div>
+
+                                        <div class="comments-list-wrap">
+                                            <h3 class="comment-count-title" style="color:black;font-weight:bold">0 Comments</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="sidebar-section">
+                                        <div class="recent-posts">
+                                            <h4>Recent Posts</h4>
+                                            <ul>
+                                                <li><a href="single-news.html">You will vainly look for fruit on it in autumn.</a></li>
+                                                <li><a href="single-news.html">A man's worth has its season, like tomato.</a></li>
+                                                <li><a href="single-news.html">Good thoughts bear good fresh juicy fruit.</a></li>
+                                                <li><a href="single-news.html">Fall in love with the fresh orange</a></li>
+                                                <li><a href="single-news.html">Why the berries always look delecious</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="archive-posts">
+                                            <h4>Archive Posts</h4>
+                                            <ul>
+                                                <li><a href="single-news.html">JAN 2019 (5)</a></li>
+                                                <li><a href="single-news.html">FEB 2019 (3)</a></li>
+                                                <li><a href="single-news.html">MAY 2019 (4)</a></li>
+                                                <li><a href="single-news.html">SEP 2019 (4)</a></li>
+                                                <li><a href="single-news.html">DEC 2019 (3)</a></li>
+                                            </ul>
+                                        </div>
+                                        @*<div class="tag-section">
+                                            <h4>Tags</h4>
+                                            <ul>
+                                                <li><a href="single-news.html">Apple</a></li>
+                                                <li><a href="single-news.html">Strawberry</a></li>
+                                                <li><a href="single-news.html">BErry</a></li>
+                                                <li><a href="single-news.html">Orange</a></li>
+                                                <li><a href="single-news.html">Lemon</a></li>
+                                                <li><a href="single-news.html">Banana</a></li>
+                                            </ul>
+                                        </div>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    'use strict';
+    const image_input = document.querySelector("#image-input");
+    image_input.addEventListener("change", function () {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            const uploaded_image = reader.result;
+            document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+        });
+        reader.readAsDataURL(this.files[0]);
+    });
+    function changesub1() {
+        var elementValue = document.getElementById('slide1-sub').value;
+        document.getElementById("part1").innerHTML = elementValue;
+    }
+    function changesub2() {
+        var elementValue = document.getElementById('slide2-sub').value;
+        document.getElementById("orange").innerHTML = elementValue;
+    }
+    function changesub3() {
+        var elementValue = document.getElementById('slide3-sub').value;
+        document.getElementById("sub3").innerHTML = elementValue;
+    }
+    function changemain1() {
+        var elementValue = document.getElementById('slide1-main').value;
+        document.getElementById("part2").innerHTML = elementValue;
+    }
+    function changemain2() {
+        var elementValue = document.getElementById('slide2-main').value;
+        document.getElementById("discount").innerHTML = elementValue;
+    }
+    function changemain3() {
+        var elementValue = document.getElementById('slide3-main').value;
+        document.getElementById("main3").innerHTML = elementValue;
+    }
+
+</script>

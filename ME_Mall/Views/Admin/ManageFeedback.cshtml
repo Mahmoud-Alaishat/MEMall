@@ -1,0 +1,99 @@
+﻿@model IEnumerable<ME_Mall.Models.FeedbackUser>
+
+@{
+    ViewData["Title"] = "Manage Feedback";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Feedback /</span> Manage Feedbacks  </h4>
+    <form asp-action="ManageFeedback" method="post">
+        <div class="input-group float-right">
+            <select class="form-select" name="id" asp-items="@(new SelectList(ViewBag.message,"Id","StatusName"))"></select>
+            <button class="btn btn-outline-primary" type="submit">Filter</button>
+        </div>
+    </form>
+
+    <!-- Basic Bootstrap Table -->
+    <div class="card">
+        <h5 class="card-header">Feedbacks</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.User.FirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.User.LastName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Feedback.FeedbackText)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Status.StatusName)
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <i class="fab fa-react fa-lg text-info me-1"></i> <strong>@Html.DisplayFor(modelItem => item.User.FirstName)</strong>
+                            </td>
+                            <td>
+                                <i class="fab fa-react fa-lg text-info"></i> <strong>@Html.DisplayFor(modelItem => item.User.LastName)</strong>
+                            </td>
+                            <td class="text-wrap">
+                                <i class="fab fa-react fa-lg text-info"></i> <strong style="max-width:120px" class="text-wrap">@Html.DisplayFor(modelItem => item.Feedback.FeedbackText)</strong>
+                            </td>
+                            <td>
+                                @{
+                                    string sta = item.Status.StatusName;
+                                    if (sta == "On review")
+                                    {
+                                        <span class="badge bg-label-info">@Html.DisplayFor(modelItem => item.Status.StatusName) </span>
+                                    }
+                                    else if (sta == "Rejected")
+                                    {
+                                        <span class="badge bg-label-danger">@Html.DisplayFor(modelItem => item.Status.StatusName) </span>
+                                    }
+                                    else if (sta == "Approved")
+                                    {
+                                        <span class="badge bg-label-success">@Html.DisplayFor(modelItem => item.Status.StatusName) </span>
+                                    }
+                                }
+                                @*<i class="fab fa-react fa-lg text-info"></i> <strong>@Html.DisplayFor(modelItem => item.Status.StatusName)</strong>*@
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <div class="d-flex">
+                                            <form class="col" asp-controller="Admin" asp-action="Reject">
+                                                <div class="form-group mb-0 col">
+                                                    <input type="hidden" asp-for="@item.Feedback.Id" />
+                                                    <input type="submit" value="Reject" class="btn btn-secondary btn-sm  w-100" asp-controller="Admin" asp-action="Reject" asp-route-id="@item.Feedback.Id" />
+                                                </div>
+                                            </form>
+                                            <form class="col" asp-controller="Admin" asp-action="Approve">
+                                                <div class="form-group mb-0 col">
+                                                    <input type="hidden" asp-for="@item.Feedback.Id" />
+                                                    <input type="submit" value="Approve" class="btn btn-primary btn-sm w-100" asp-controller="Admin" asp-action="Approve" asp-route-id="@item.Feedback.Id" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

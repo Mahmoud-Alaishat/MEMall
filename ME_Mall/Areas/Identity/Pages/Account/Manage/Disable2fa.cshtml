@@ -1,0 +1,51 @@
+﻿@page
+@model Disable2faModel
+@{
+    ViewData["Title"] = "Disable two-factor authentication (2FA)";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+@{
+    if (this.User.IsInRole("Admin") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    }
+    else if (this.User.IsInRole("Owner") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_OwnerLayout.cshtml";
+
+    }
+    else if (this.User.IsInRole("User") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+    }
+    else if (this.User.IsInRole("Content Writer") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_ContentWriterLayout.cshtml";
+
+    }
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <partial name="_StatusMessage" for="StatusMessage" />
+    @if (!this.User.IsInRole("User") || !this.User.Identity.IsAuthenticated)
+    {
+        <partial name="_ManageNav" />
+
+    }    <h4>@ViewData["Title"]</h4>
+
+    <div class="alert alert-warning" role="alert">
+        <p>
+            <strong>This action only disables 2FA.</strong>
+        </p>
+        <p>
+            Disabling 2FA does not change the keys used in authenticator apps. If you wish to change the key
+            used in an authenticator app you should <a asp-page="./ResetAuthenticator">reset your authenticator keys.</a>
+        </p>
+    </div>
+
+    <div>
+        <form method="post" class="form-group">
+            <button class="btn btn-danger" type="submit">Disable 2FA</button>
+        </form>
+    </div>
+</div>

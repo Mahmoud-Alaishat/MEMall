@@ -1,0 +1,106 @@
+﻿@model ME_Mall.Models.IndexViewModel<ArticleUser>
+@using System.Globalization;
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>News And Articles</p>
+                    <h1>News-Articles List</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+<!-- latest news -->
+<div class="latest-news mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            @foreach (var it in Model.Items)
+            {
+                <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
+                    <div class="single-latest-news">
+                        <a asp-action="Article" asp-controller="News" asp-route-id="@it.NewsAndArticles.Id"><div class="latest-news-bg" style="background-image: url('/Images/Articles/@it.NewsAndArticles.PostImg');"></div></a>
+                        <div class="news-text-box">
+                            <h3><a asp-action="Article" asp-controller="News" asp-route-id="@it.NewsAndArticles.Id">@it.NewsAndArticles.Title</a></h3>
+                            <p class="blog-meta">
+                                <span class="author"><i class="fas fa-user"></i> @it.User.FirstName @it.User.LastName</span>
+                                <span class="date"><i class="fas fa-calendar"></i> @it.NewsAndArticles.PostDate.Day @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(@it.NewsAndArticles.PostDate.Month), @it.NewsAndArticles.PostDate.Year</span>
+                            </p>
+                            @if (it.NewsAndArticles.Text.Length <= 120)
+                            {
+                                <p class="excerpt">@it.NewsAndArticles.Text</p>
+                            }
+                            else
+                            {
+                                <p class="excerpt">@it.NewsAndArticles.Text.ToString().Substring(0, 120)...</p>
+                            }
+                            <a asp-action="Article" asp-controller="News" asp-route-id="@it.NewsAndArticles.Id" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="pagination-wrap">
+                            @*<ul>
+            <li><a href="#">Prev</a></li>
+            <li><a href="#">1</a></li>
+            <li><a class="active" href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">Next</a></li>
+        </ul>*@
+                            <!-- pager -->
+                            @if (Model.Pager.EndPage > 1)
+                            {
+                                <ul>
+                                    @if (Model.Pager.CurrentPage > 1)
+                                    {
+                                        <li>
+                                            <a href="~/News/Index"><i class="fas fa-arrow-left"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="~/News/Index?page=@(Model.Pager.CurrentPage - 1)">Prev</a>
+                                        </li>
+                                    }
+
+                                    @for (var p = Model.Pager.StartPage; p <= Model.Pager.EndPage; p++)
+                                    {
+                                        <li class="@(p == Model.Pager.CurrentPage ? "active" : "")">
+                                            <a href="~/News/Index?page=@p"> @p</a>
+                                        </li>
+                                    }
+
+                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                    {
+                                        <li>
+                                            <a href="~/News/Index?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/News/Index?page=@(Model.Pager.TotalPages)"><i class="fas fa-arrow-right"></i></a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end latest news -->
+

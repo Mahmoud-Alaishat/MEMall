@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script type="text/javascript">
+		function sendEmail() {
+			Email.send({
+                SecureToken: "a06eb22a-d350-4a03-90de-207be250d8fb",
+                To: 'mahmoudalaishat1@gmail.com',
+                From: "alaishat39@gmail.com",
+				Subject : "Test Email",
+				Body : "<h3>Hello Mahmoud</h3><b>welcome here</b>",
+			})
+			.then(function(message){
+				alert("mail sent successfully")
+			});
+		}
+    </script>
+</head>
+<body>
+    <form method="post">
+        <input type="button" value="Send Email" onclick="sendEmail()" />
+    </form>
+
+</body>
+</html>

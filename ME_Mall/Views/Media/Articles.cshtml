@@ -1,0 +1,108 @@
+﻿@model IEnumerable<ME_Mall.Models.NewsAndArticles>
+@{
+    ViewData["Title"] = "Articles";
+    Layout = "~/Views/Shared/_ContentWriterLayout.cshtml";
+}
+<style>
+    .dt-buttons {
+        margin-left: 16px;
+        width: 50%
+    }
+
+    div.dataTables_wrapper div.dataTables_filter {
+        text-align: right;
+        margin-left: 40px;
+        margin-right: 16px;
+        width: 100%;
+        display: inline
+    }
+
+    #example_length {
+        margin-left: 40px;
+        display: inline;
+        width: 25%
+    }
+
+    div.dataTables_wrapper div.dataTables_info {
+        padding-top: 0.85em;
+        margin-left: 16px;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        margin-right: 16px;
+        margin-bottom: 10px;
+        white-space: nowrap;
+        justify-content: flex-end;
+    }
+</style>
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Articles /</span> View articles</h4>
+    <p>
+        <a class="btn btn-outline-primary" asp-action="WriteArticle"><i class="bx bx-pencil"></i> Write article</a>
+    </p>
+    <!-- Basic Bootstrap Table -->
+    <div class="card">
+        <h5 class="card-header">Articles</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table" id="example">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PostDate)
+                        </th>
+                        
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <i class="fab fa-react fa-lg text-info me-1"></i> <strong>@Html.DisplayFor(modelItem => item.Title)</strong>
+                            </td>
+                            <td>
+                                <i class="fab fa-react fa-lg text-info me-3"></i> <strong>@Html.DisplayFor(modelItem => item.PostDate)</strong>
+                            </td>
+                            
+                            <td>
+                                <div class="dropdown">
+                                    <i class="fab fa-react fa-lg text-info me-3"></i>
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" asp-action="EditArticle" asp-route-id="@item.Id"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        <a class="dropdown-item" asp-action="ArticlePreview" asp-route-id="@item.Id"><i class="bx bxs-show"></i> Preview</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let table = new DataTable('#example', {
+            dom: 'Blfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ],
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All'],
+            ]
+        });
+    });
+
+</script>

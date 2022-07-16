@@ -1,0 +1,90 @@
+﻿@page
+@model EmailModel
+@{
+    ViewData["Title"] = "Manage Email";
+    ViewData["ActivePage"] = ManageNavPages.Email;
+}
+@{
+    if (this.User.IsInRole("Admin") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    }
+    else if (this.User.IsInRole("Owner") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_OwnerLayout.cshtml";
+
+    }
+    else if (this.User.IsInRole("User") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+    }
+    else if (this.User.IsInRole("Content Writer") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_ContentWriterLayout.cshtml";
+
+    }
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+    @if (!this.User.IsInRole("User") || !this.User.Identity.IsAuthenticated)
+    {
+        <partial name="_ManageNav" />
+
+    }    <div class="col-xl ">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class='bx bxs-message'></i> Change Email</h5>
+                <small class="text-muted float-end">Account Settings</small>
+            </div>
+            <div class="card-body">
+                <form id="email-form" enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @if (Model.IsEmailConfirmed)
+                    {
+                        <div class="mb-3">
+                            <label class="form-label" asp-for="Email" for="basic-default-fullname"></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" disabled asp-for="Email" id="basic-default-fullname" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text text-success font-weight-bold">✓</span>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="mb-3">
+                            <label class="form-label" asp-for="Email" for="basic-default-fullname"></label>
+                            <input type="text" class="form-control" disabled asp-for="Email" id="basic-default-fullname" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                        </div>
+                    }
+                    <div class="mb-3">
+                        <label class="form-label" asp-for="Input.NewEmail" for="basic-default-fullname"></label>
+                        <input type="text" class="form-control" asp-for="Input.NewEmail" id="basic-default-fullname" />
+                        <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+                    </div>
+                    @*<div class="mb-3">
+                            <label class="form-label" asp-for="ImageFile" for="basic-default-fullname"></label>
+                            <input class="form-control" asp-for="ImageFile" id="basic-default-fullname" accept="image/*" />
+                            <span asp-validation-for="ImageFile" class="text-danger"></span>
+                        </div>
+                    *@
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" asp-page-handler="ChangeEmail">Change Email</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

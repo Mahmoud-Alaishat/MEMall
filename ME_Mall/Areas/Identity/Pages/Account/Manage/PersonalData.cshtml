@@ -1,0 +1,64 @@
+﻿@page
+@model PersonalDataModel
+@{
+    ViewData["Title"] = "Personal Data";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+@{
+    if (this.User.IsInRole("Admin") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    }
+    else if (this.User.IsInRole("Owner") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_OwnerLayout.cshtml";
+
+    }
+    else if (this.User.IsInRole("User") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+    }
+    else if (this.User.IsInRole("Content Writer") || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_ContentWriterLayout.cshtml";
+
+    }
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    @if (!this.User.IsInRole("User") || !this.User.Identity.IsAuthenticated)
+    {
+        <partial name="_ManageNav" />
+
+    }    <div class="col-xl ">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class='bx bxs-data'></i> Personal Data</h5>
+                <small class="text-muted float-end">Account Settings</small>
+            </div>
+            <div class="card-body">
+                <div class="pl-lg-4">
+                    <div class="row">
+                        <div class="col-lg-6 mb-2">
+                            <p>Your account contains personal data that you have given us. This page allows you to download or delete that data.</p>
+                            <p>
+                                <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <form id="download-data" asp-page="DownloadPersonalData" method="post" class="form-group">
+                        <button type="submit" class="btn btn-primary">Download</button>
+                    </form>
+                    <a id="delete" asp-page="DeletePersonalData" type="submit" class="btn btn-danger" style="margin-left:4px">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
