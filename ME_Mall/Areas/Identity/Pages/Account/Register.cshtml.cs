@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using ME_Mall.Controllers;
 using ME_Mall.Data;
 using ME_Mall.Models;
+using ME_Mall.Services.EmailService;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -19,6 +21,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 
@@ -32,6 +35,7 @@ namespace Ataa.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _WebHostEnvironment;
+        private readonly IConfiguration _config;
 
 
         public RegisterModel(
@@ -40,7 +44,8 @@ namespace Ataa.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             ApplicationDbContext context,
-            IWebHostEnvironment webHostEnvironment)
+            IWebHostEnvironment webHostEnvironment,
+            IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -48,7 +53,7 @@ namespace Ataa.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _context = context;
             _WebHostEnvironment = webHostEnvironment;
-
+            _config = config;
         }
 
         [BindProperty]
