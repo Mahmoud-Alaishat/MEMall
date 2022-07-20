@@ -147,8 +147,13 @@ namespace Ataa.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    EmailDto mail = new EmailDto();
+                    mail.Subject = "Confirm your email";
+                    mail.To = Input.Email;
+                    mail.Body= $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+                    IEmailService emailService = new EmailService(_config);
+                    EmailController emailController = new EmailController(emailService);
+                    emailController.SendEmail(mail);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
