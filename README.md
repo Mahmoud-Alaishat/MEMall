@@ -1,5 +1,5 @@
 <!-- Add banner here -->
-![Banner](https://github.com/navendu-pottekkat/awesome-readme/blob/master/header.png)
+![Banner](https://github.com/Mahmoud-Alaishat/MEMall/blob/master/1.png)
 
 # MEMall
 
@@ -30,9 +30,6 @@ There are endless badges that you could use in your projects. And they do depend
 
 After you have written about your project, it is a good idea to have a demo/preview(**video/gif/screenshots** are good options) of your project so that people can know what to expect in your project. You could also add the demo in the previous section with the product description.
 
-Here is a random GIF as a placeholder.
-
-![Random GIF](https://media.giphy.com/media/ZVik7pBtu9dNS/giphy.gif)
 
 
 # Footer
@@ -41,4 +38,4 @@ Here is a random GIF as a placeholder.
 
 <!-- Add the footer here -->
 
-![Footer](https://github.com/navendu-pottekkat/awesome-readme/blob/master/fooooooter.png)
+![Footer](https://github.com/Mahmoud-Alaishat/MEMall/blob/master/2.png)
